@@ -17,9 +17,12 @@ RUN apt update && apt install -y redis-server
 # Copy source code to workspace
 COPY core .
 
+# Install core commands
+RUN SETUPTOOLS_USE_DISTUTILS=stdlib pip install -e server
+
 # Clean up
 RUN rm -rf /tmp/*
 RUN rm -rf /var/lib/apt/lists/*
 
 ENTRYPOINT ["./entrypoint.sh"]
-CMD ["/bin/bash"]
+CMD ["python", "server/test.py"]

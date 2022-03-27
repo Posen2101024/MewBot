@@ -33,10 +33,10 @@ build-dev: kill
 	docker build -t $(IMAGE) .
 
 run:
-	docker run -itd \
+	docker run -it \
 		-v $(PWD)/redis:/var/lib/redis \
+		--env TOKEN=$(TOKEN) \
 		--name $(CONTAINER) $(IMAGE)
-	-docker exec -it $(CONTAINER) /bin/bash
 
 exec:
 	@set -euo pipefail; \
